@@ -37,11 +37,9 @@ function displayNumbers(numbers) {
   let templateRows = "";
 
   for (let i = 0; i < numbers.length; i++) {
-
     let number = numbers[i];
     numbers[i] % 2 === 0 ? templateRows += `<tr><td><b>${number}</b></td></tr>` : templateRows += `<tr><td>${number}</td></tr>`;
   }
 
   document.getElementById('results').innerHTML = templateRows;
-
 }

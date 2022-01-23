@@ -37,10 +37,7 @@
     <!-- Nav Section -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand logoFont" href="#"
-          >
-          Hundo</a
-        >
+        <a class="navbar-brand logoFont" href="#"> Hundo</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -66,7 +63,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" target="_blank" href="#">Git Repo</a>
+              <a class="nav-link" target="_blank" href="https://github.com/calebj516/Hundo">Git Repo</a>
             </li>
             <li class="nav-item">
               <a
@@ -88,19 +85,66 @@
           <div class="col-lg-8">
             <pre class="line-numbers">
                 <code class="language-javascript">
-                  // call Hello World
-                    function HelloWorld() {
-                      alert("Hello World!");
+                  // get the values from the UI (controller function)
+                  function getValues() {
+                    // get values from the page
+                    let startValue = document.getElementById('startValue').value;
+                    let endValue = document.getElementById('endValue').value;
+
+                    // parse into Integers
+                    startValue = parseInt(startValue);
+                    endValue = parseInt(endValue);
+
+                    if(Number.isInteger(startValue) && Number.isInteger(endValue)) {
+                      let numbers = generateNumbers(startValue, endValue);
+                      // call displayNumbers
+                      displayNumbers(numbers);
+                    } else {
+                      alert("Error! You must enter integers.");
                     }
+
+                  }
+
+                  // generate numbers from the start value to the end value (logic function)
+                  function generateNumbers(start, end) {
+
+                    let numbers = [];
+
+                    for(let i = start; i <= end; i++){
+                      numbers.push(i);
+                    }
+
+                    return numbers;
+                  }
+
+                  // display the numbers and mark the even numbers bold (display or view function)
+                  function displayNumbers(numbers) {
+
+                    let templateRows = "";
+
+                    for (let i = 0; i < numbers.length; i++) {
+                      let number = numbers[i];
+                      numbers[i] % 2 === 0 ? templateRows += `&lt;tr>&lt;td>&lt;b>${number}&lt;/b>&lt;/td>&lt;/tr>` : templateRows += `&lt;tr>&lt;td>${number}&lt;/td>&lt;/tr>`;
+                    }
+
+                    document.getElementById('results').innerHTML = templateRows;
+                  }
               </code>
             </pre>
           </div>
           <div class="col-lg-4">
-            <p>The Code is structured in one function.</p>
-            <h5>Hello World</h5>
+            <p>The code is structured using three functions.</p>
+            <h5>Get Values</h5>
             <p>
-              Hello World is a function that displays an alert with a message of
-              "Hello World!"
+              getValues is a function that retrieves the values of the inputs from the Enter Values section on The App page. It validates the input, ensuring that the values entered into the inputs are in fact numbers. Once the function verifies this, it calls another function called generateNumbers, passing as arguments the start value and the end value from the inputs. This returns an array containing those numbers (along with every number in between), which gets passed to displayNumbers, which as the name suggests handles displaying the numbers on the screen.
+            </p>
+            <h5>Generate Numbers</h5>
+            <p>
+              generateNumbers is the second function used in this coding challenge. A for loop is used, with the starting value and ending value as the minimum and maximum values, to push each number to an array called numbers. This array is returned.
+            </p>
+            <h5>Display Numbers</h5>
+            <p>
+              displayNumbers is our third and final function used in this coding challenge. An empty string, called, templateRows, will be used to hold the same HTML one would write to display the numbers on The App page. Another for loop is used to process each number in the numbers array from generateNumbers. Within this for loop is located a statement using the ternary operator, which is essentially an alternative to an if-else statement; this line of code bolds the numbers that are even and does nothing to the numbers that are odd. The result of this statement is appended to templateRows and is added to the body of the table created to hold the results, which has an Id of 'results', on line 43.
             </p>
           </div>
         </div>
